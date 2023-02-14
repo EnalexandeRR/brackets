@@ -10,9 +10,12 @@ module.exports = function check(str, bracketsConfig) {
 
   for (let i = 0; i < str.length; i++) {
     let currentSymbol = str[i];
-
     if (openBrackets.includes(currentSymbol)) {
-      stack.push(currentSymbol);
+      if (currentSymbol === "|" && stack[stack.length - 1] === "|") {
+        stack.pop();
+      } else {
+        stack.push(currentSymbol);
+      }
     } else {
       if (stack.length === 0) {
         return false;
